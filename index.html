@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صدقة جارية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Amiri', serif;
+            background-color: #f0f4f4;
+            color: #2d3d3d;
+        }
+
+        /* صفحة البداية */
+        .intro {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #1e4b6c;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        .intro img {
+            width: 250px;
+            height: 250px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .countdown {
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* الصفحة الرئيسية */
+        .main-content {
+            display: none;
+            padding: 40px;
+        }
+
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            background-color: #fff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            margin: 0 0 15px;
+            font-size: 24px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* تصميم المستطيلات */
+        .quran-names .name-card {
+            display: inline-block;
+            width: 200px;
+            padding: 15px;
+            margin: 15px;
+            text-align: center;
+            background-color: #e6f4f1;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .quran-names .name-card:hover {
+            transform: scale(1.05);
+            background-color: #b2dfdb;
+        }
+
+        .quran-names .name-card p {
+            margin: 0;
+            font-weight: bold;
+            color: #00796b;
+            font-size: 18px;
+        }
+
+        /* عرض التفاصيل */
+        .quran-details {
+            display: none;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .quran-details img {
+            width: 200px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .quran-details h3 {
+            margin: 10px 0;
+            font-size: 22px;
+            color: #2d3d3d;
+        }
+
+        audio {
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* قائمة الأدعية */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            font-size: 18px;
+            padding: 10px 0;
+            font-weight: bold;
+            color: #00796b;
+        }
+    </style>
+</head>
+<body>
+    <!-- صفحة البداية -->
+    <div class="intro">
+        <img src="person.jpg" alt="صورة المرحوم">
+        <h1>صدقة جارية لروح المغفور له عبد الله الوكيل</h1>
+        <p>سيتم نقلك للموقع خلال:</p>
+        <div class="countdown" id="countdown">5</div>
+    </div>
+
+    <!-- الصفحة الرئيسية -->
+    <div class="main-content">
+        <!-- قسم القرآن الكريم -->
+        <div id="quran" class="section">
+            <h2>القرآن الكريم</h2>
+            <div class="quran-names">
+                <div class="name-card" onclick="showDetails('سورة الإخلاص', 'سورة الإخلاص.mp3')">
+                    <p>سورة الإخلاص</p>
+                </div>
+                <div class="name-card" onclick="showDetails('سورة الناس', 'سورة الناس.mp3')">
+                    <p>سورة الناس</p>
+                </div>
+                <div class="name-card" onclick="showDetails('سورة النصر', 'سورة النصر.mp3')">
+                    <p>سورة النصر</p>
+                </div>
+                <div class="name-card" onclick="showDetails('سورة الفلق', 'سورة الفلق.mp3')">
+                    <p>سورة الفلق</p>
+                </div>
+            </div>
+
+            <!-- تفاصيل السورة -->
+            <div class="quran-details" id="quranDetails">
+                <img id="sheikhImage" src="" alt="صورة الشيخ">
+                <h3 id="sheikhName"></h3>
+                <p id="surahName"></p>
+                <audio id="audioPlayer" controls></audio>
+            </div>
+        </div>
+
+<!-- قسم الأدعية -->
+<div id="prayers" class="section">
+  <h2>الأدعية</h2>
+  <ul>
+    <li>
+      <span class="check-box" onclick="toggleCheck(this)"></span>
+      اللهم اغفر له وارحمه واجعل قبره نورًا.
+    </li>
+    <li>
+      <span class="check-box" onclick="toggleCheck(this)"></span>
+      اللهم اجعل قبره روضة من رياض الجنة ووسّع مدخله.
+    </li>
+    <li>
+      <span class="check-box" onclick="toggleCheck(this)"></span>
+      اللهم اجعل عمله صالحًا في ميزان حسناته.
+    </li>
+    <li>
+      <span class="check-box" onclick="toggleCheck(this)"></span>
+      اللهم اجعل عبد الله الوكيل من أهل الجنة بغير حساب.
+    </li>
+    <li>
+      <span class="check-box" onclick="toggleCheck(this)"></span>
+      اللهم اجعل الجنة مثواه، واغسله بالماء والثلج والبرد.
+    </li>
+    <li>
+      <span class="check-box" onclick="toggleCheck(this)"></span>
+      اللهم اجعل قبره خير منزل، واجعل له شفيعًا من أهل الجنة.
+    </li>
+    <li>
+      <span class="check-box" onclick="toggleCheck(this)"></span>
+      اللهم اجعل رحمتك عليه وسعت كل شيء.
+    </li>
+    <li>
+      <span class="check-box" onclick="toggleCheck(this)"></span>
+      اللهم اجعل له نورًا في قبره، واجعلنا من الذين يقرؤون القرآن له من بعده.
+    </li>
+  </ul>
+</div>
+
+<style>
+  /* تصميم المربع أو الدائرة بجانب الدعاء */
+  .check-box {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    border-radius: 50%;
+    border: 2px solid #00796b;
+    background-color: transparent;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  /* تأثير ظهور علامة الصح */
+  .check-box::after {
+    content: '✔';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+    color: #00796b;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .check-box.checked::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
+
+<script>
+  // وظيفة لتفعيل و إلغاء التفعيل عند الضغط على المربع
+  function toggleCheck(element) {
+    element.classList.toggle('checked');
+  }
+</script>
+
+    <script>
+        // عداد تنازلي
+        let countdown = 5;
+        const countdownEl = document.getElementById('countdown');
+        const intro = document.querySelector('.intro');
+        const mainContent = document.querySelector('.main-content');
+
+        const timer = setInterval(() => {
+            countdown--;
+            countdownEl.textContent = countdown;
+            if (countdown === 0) {
+                clearInterval(timer);
+                intro.style.display = 'none';
+                mainContent.style.display = 'block';
+            }
+        }, 1000);
+
+        // عرض تفاصيل السورة
+        function showDetails(surahName, audioSrc) {
+            document.getElementById('sheikhImage').src = 'الشيخ.jpg';
+            document.getElementById('sheikhName').textContent = 'الشيخ ياسر بن راشد الدوسري';
+            document.getElementById('surahName').textContent = surahName;
+
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = audioSrc;
+            audioPlayer.play();
+
+            document.getElementById('quranDetails').style.display = 'block';
+        }
+    </script>
+    
+<!-- قسم حقوق الملكية والمشاركة -->
+<div class="footer">
+  <div class="rights">
+    <p>جميع الحقوق محفوظة &copy; 2024 - Ziad Alaa</p>
+  </div>
+
+  <div class="social-share">
+    <p>مشاركة الموقع:</p>
+    <!-- زر نسخ الرابط -->
+    <button class="btn-share" onclick="copyLink()">نسخ الرابط</button>
+
+    <!-- أزرار المشاركة على منصات مختلفة -->
+    <a href="https://wa.me/?text=[URL الموقع]" target="_blank">
+      <button class="btn-share">مشاركة عبر واتساب</button>
+    </a>
+
+    <a href="https://www.facebook.com/sharer/sharer.php?u=[URL الموقع]" target="_blank">
+      <button class="btn-share">مشاركة على فيسبوك</button>
+    </a>
+
+    <a href="https://twitter.com/intent/tweet?url=[URL الموقع]&text=[نص مخصص]" target="_blank">
+      <button class="btn-share">مشاركة على تويتر</button>
+    </a>
+
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=[URL الموقع]" target="_blank">
+      <button class="btn-share">مشاركة على لينكدإن</button>
+    </a>
+  </div>
+</div>
+
+<style>
+  .footer {
+    background-color: #1e4b6c;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 40px;
+    border-top: 2px solid #00796b;
+  }
+
+  .footer .rights {
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-weight: normal;
+  }
+
+  .footer .social-share {
+    margin-top: 10px;
+  }
+
+  .footer .social-share p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  /* تصميم الأزرار */
+  .footer .btn-share {
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    margin: 8px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .footer .btn-share:hover {
+    background-color: #004d40;
+    transform: scale(1.05);
+  }
+
+  .footer .btn-share:active {
+    background-color: #00332b;
+  }
+
+  /* تحسين التباين بين الأزرار */
+  .footer a {
+    text-decoration: none;
+  }
+</style>
+
+<script>
+  // وظيفة لنسخ الرابط إلى الحافظة
+  function copyLink() {
+    const url = window.location.href; // الحصول على الرابط الحالي
+    navigator.clipboard.writeText(url) // نسخ الرابط إلى الحافظة
+      .then(() => {
+        alert("تم نسخ الرابط! يمكنك الآن مشاركته في أي مكان.");
+      })
+      .catch(err => {
+        alert("فشل في نسخ الرابط.");
+      });
+  }
+</script>
+</body>
+
+</html>
